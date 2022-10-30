@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showDetail=false
+    
     var body: some View {
         
         ZStack {
@@ -15,13 +17,16 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(Color.green)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            Button( action: {print("xitl")}){
+            Button( action: {showDetail = true}){
                     Image(systemName: "timer")
                         .font(.system(size: 150))
                 }
                     .background(Color.red)
                     .foregroundColor(Color.white)
                 .clipShape(Circle())
+        }.sheet(isPresented: $showDetail) {
+            TimerView(show: $showDetail, running: true)
+                .toolbar(.hidden)
         }
         
     }
